@@ -125,7 +125,7 @@ module.exports = function (app) {
                         }
                     }).catch(err => console.log(err))
 
-            }).catch(err => console.log(err));
+            }).catch(console.log('here'));
 
 
   
