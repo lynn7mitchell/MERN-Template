@@ -1,67 +1,32 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import setAuthToken from "../utils/setAuthtoken";
 import axios from "axios";
-// import io from 'socket.io-client';
 
-export class Dashboard extends Component {
-  state = {
-    user: {}
-  };
-  
-  componentWillMount() {
+export default function Dashboard() {
+
+  const [user, setUser] = useState({})
+  useEffect(() => {
+    // gets the bearer token to validate the user that is logged in
     const token = localStorage.getItem("example-app");
 
     if (token) {
       setAuthToken(token);
     }
 
-    axios
-      .get("api/user")
-      .then(response => {
-        this.setState({
-          user: response.data
-        });
-      })
-      .catch(err => console.log(err.response));
+    axios.get("/api/user")
+    .then(res =>{
+      setUser(res.data)
+    })
+    .catch((err) => {
+      console.error(err.res.data);
+    });
 
+  }, []);
 
-
-      
-  }
-
-  // componentDidMount(){
-  //   // const socket = io('localhost:3001');
-  //   // socket.on('connection')
-  // }
-  
-  // handleLogout = () => {
-  //   localStorage.removeItem("example-app");
-  //   this.setState({
-  //     redirect: true
-  //   });
-  // };
-  // connectToRoom = (e) =>{
-  //   console.log(e.target.attributes.room.value)
-  // }
-  render() {
-    return (
-      <div>
-        {/* <i className="material-icons account-icon">account_circle</i>
-        <Link to="/">
-          <button className="logout-button" onClick={this.handleLogout}>
-            Log Out
-          </button>
-        </Link>
-        <h1>Dashboard</h1>
-
-        <Link to={{ pathname: "/chatroom/" + '1234' }}><h3 room={1234} onClick={this.connectToRoom}>John</h3></Link>
-        <Link to={{ pathname: "/chatroom/" + '2345' }}><h3  room={2345}>Paul </h3></Link>
-        <h3  room={3456}>George</h3>
-        <h3  room={4567}>Ringo</h3> */}
-      </div>
-    );
-  }
+  return (
+    <div>
+      <h1>Dashboard</h1>
+      <h2>Welcome {user.firstName + ' ' + user.lastName }</h2>
+    </div>
+  )
 }
-
-export default Dashboard;
