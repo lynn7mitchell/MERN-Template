@@ -1,47 +1,32 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import setAuthToken from "../utils/setAuthtoken";
 import axios from "axios";
 
-export class Dashboard extends Component {
-  state = {
-    user: {}
-  };
-  componentWillMount() {
+export default function Dashboard() {
+
+  const [user, setUser] = useState({})
+  useEffect(() => {
+    // gets the bearer token to validate the user that is logged in
     const token = localStorage.getItem("example-app");
 
     if (token) {
       setAuthToken(token);
     }
 
-    axios
-      .get("api/user")
-      .then(response => {
-        this.setState({
-          user: response.data
-        });
-      })
-      .catch(err => console.log(err.response));
-  }
-  handleLogout = () => {
-    localStorage.removeItem("example-app");
-    this.setState({
-      redirect: true
+    axios.get("/api/user")
+    .then(res =>{
+      setUser(res.data)
+    })
+    .catch((err) => {
+      console.error(err.res.data);
     });
-  };
-  render() {
-    return (
-      <div>
-        {/* <i className="material-icons account-icon">account_circle</i> */}
-        <Link to="/">
-          <button className="logout-button" onClick={this.handleLogout}>
-            Log Out
-          </button>
-        </Link>
-        <h1>Dashboard</h1>
-      </div>
-    );
-  }
-}
 
-export default Dashboard;
+  }, []);
+
+  return (
+    <div>
+      <h1>Dashboard</h1>
+      <h2>Welcome {user.firstName + ' ' + user.lastName }</h2>
+    </div>
+  )
+}
