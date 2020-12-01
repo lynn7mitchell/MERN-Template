@@ -27,6 +27,7 @@ export default function Login() {
     setFormData({ ...formData, hasChanged: true, [name]: value });
   };
 
+  // Form Submit
   const onSubmit = (e) => {
     e.preventDefault();
 
@@ -53,6 +54,8 @@ export default function Login() {
       });
   };
 
+  // When the user is logged in redirect is set to true in state. 
+  // Then the page redirects to dashboard
   if (redirect) {
     return <Redirect to="/dashboard" />;
   }
