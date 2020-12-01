@@ -1,11 +1,10 @@
-import React, { Component } from "react";
+import React from 'react'
 import { Link } from "react-router-dom";
 
-// 404 page
-export class NoMatch extends Component {
-  render() {
-    return (
-      <div>
+export default function NoMatch() {
+  return (
+    <div>
+    <div>
         <Link
           to={{
             pathname: "/",
@@ -16,8 +15,6 @@ export class NoMatch extends Component {
 
         <h1>404 Page Not Found</h1>
       </div>
-    );
-  }
+    </div>
+  )
 }
-
-export default NoMatch;
