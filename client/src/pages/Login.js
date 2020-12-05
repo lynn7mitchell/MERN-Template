@@ -49,8 +49,8 @@ export default function Login() {
         setErrors(errors);
       })
       .catch((err) => {
-        console.error(err.res.data);
-        setErrors(err.res.data);
+        console.error(err.response.data,);
+        setErrors(err.response.data,);
       });
   };
 
@@ -65,6 +65,8 @@ export default function Login() {
         <i className="material-icons back-button">arrow_back</i>
       </Link>
       <h3>LOG IN</h3>
+      {errors.user ? <p>{errors.user}</p> : ''}
+        {errors.password ? <p>{errors.password}</p> : ''}
       <form onSubmit={(e) => onSubmit(e)}>
         {/* Email */}
         <input
