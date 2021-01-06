@@ -12,8 +12,8 @@ export default function Home() {
         <button> Sign Up</button>
       </Link>
       <p>Demo Login:</p>
-      <p>Email: test@gmail.com</p>
-      <p>Password: test</p>
+      <p>Email: code7sandbox@gmail.com</p>
+      <p>Password: DemoTest#1</p>
     </div>
   );
 }

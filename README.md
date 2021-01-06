@@ -1,6 +1,6 @@
 # Mern Template
 
-Live Link: TBA
+Live Link: https://mern-template-hooks.herokuapp.com/
 
 # Purpose
 
